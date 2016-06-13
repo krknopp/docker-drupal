@@ -12,3 +12,6 @@ cd /var/www/site/docroot/sites/default && ln -s remote.settings.php settings.php
 # Symlink files folder
 cd /var/www/site/docroot/sites/default && ln -sfn /mnt/sites-files/public files
 cd /var/www/site/ && ln -sfn /mnt/sites-files/private private
+
+# Set DRUPAL_VERSION
+export DRUPAL_VERSION=$(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal version" | awk '{ print substr ($(NF), 0, 2) }')

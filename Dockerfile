@@ -14,6 +14,13 @@ RUN a2enmod ssl rewrite proxy_fcgi headers
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor /var/run/php /mnt/sites-files
 
+#Install drush
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer \
+&& ln -s /usr/local/bin/composer /usr/bin/composer
+
+RUN git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && cd /usr/local/src/drush \
+&& git checkout 8.1.2 && cd /usr/local/src/drush && composer install
+
 # Install Drupal Console
 ADD https://drupalconsole.com/installer /usr/local/bin/drupal
 RUN chmod +x /usr/local/bin/drupal
