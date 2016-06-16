@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod ssl rewrite proxy_fcgi headers
 
-RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor /var/run/php /mnt/sites-files
+RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor /var/run/php /mnt/sites-files /etc/confd/{conf.d,templates}
 
 #Install drush
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer \
@@ -27,12 +27,19 @@ RUN chmod +x /usr/local/bin/drupal
 RUN /usr/local/bin/drupal init --override
 RUN /usr/local/bin/drupal settings:set checked "true"
 
+# Install Confd
+ADD https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 /usr/local/bin/confd
+RUN chmod +x /usr/local/bin/confd
+
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY www.conf /etc/php/7.0/fpm/pool.d/www.conf
 COPY crons.conf /root/crons.conf
 COPY start.sh /root/start.sh
 COPY site.conf /etc/apache2/sites-available/000-default.conf
 COPY php.ini /etc/php/7.0/fpm/php.ini
+COPY confd/ssmtp.toml /etc/confd/conf.d/ssmtp.toml
+COPY confd/ssmtp.tmpl /etc/confd/templates/ssmtp.tmpl
 
 #Add cron job
 RUN crontab /root/crons.conf

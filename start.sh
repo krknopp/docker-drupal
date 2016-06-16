@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set up SSMTP Config Files
+/usr/local/bin/confd -onetime -backend env
+
 # Add gitlab to hosts file
 grep -q -F "$GIT_HOSTS" /etc/hosts  || echo $GIT_HOSTS >> /etc/hosts
 

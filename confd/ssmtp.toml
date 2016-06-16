@@ -1,0 +1,8 @@
+[template]
+src = "ssmtp.tmpl"
+dest = "/etc/ssmtp/ssmtp.conf"
+keys = [
+"/sesauthuser",
+"/sesauthpass",
+"/sesmailhub",
+]
