@@ -30,14 +30,16 @@ RUN /usr/local/bin/drupal settings:set checked "true"
 ADD https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 /usr/local/bin/confd
 RUN chmod +x /usr/local/bin/confd
 
-
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY www.conf /etc/php/7.0/fpm/pool.d/www.conf
-COPY crons.conf start.sh /root/
-COPY site.conf /etc/apache2/sites-available/000-default.conf
 COPY php.ini /etc/php/7.0/fpm/php.ini
-COPY confd/ssmtp.toml /etc/confd/conf.d/ssmtp.toml
-COPY confd/ssmtp.tmpl /etc/confd/templates/ssmtp.tmpl
+COPY site.conf /etc/apache2/sites-available/000-default.conf
+COPY confd /etc/confd/
+
+# Copy in drupal-specific files
+COPY drupal-settings.sh crons.conf start.sh /root/
+COPY drupal7-settings /root/drupal7-settings/
+COPY drupal8-settings /root/drupal8-settings/
 
 #Add cron job
 RUN crontab /root/crons.conf
