@@ -15,3 +15,6 @@ cd /var/www/site/ && ln -sfn /mnt/sites-files/private private
 
 # Set DRUPAL_VERSION
 echo $(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal version" | awk '{ print substr ($(NF), 0, 2) }') > /root/drupal-version.txt
+
+# Create Drupal settings, if they don't exist
+/root/drupal-settings.sh

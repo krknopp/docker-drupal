@@ -46,7 +46,7 @@ $settings['base_url'] = {{getenv "DRUPAL_BASE_URL"}};
 /**
  * Include a custom settings file if it exists.
  */
-$custom_settings = dirname(__FILE__) . '/custom.settings.php';
+$custom_settings = DRUPAL_ROOT . '/sites/default/custom.settings.php';
 if (file_exists($custom_settings)) {
   include $custom_settings;
 }
