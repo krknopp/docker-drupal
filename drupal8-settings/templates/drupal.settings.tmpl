@@ -1,11 +1,11 @@
 <?php
 
 $databases['default']['default'] = array (
-  'database' => {{getenv "MYSQL_DATABASE"}},
-  'username' => {{getenv "MYSQL_USER"}},
-  'password' => {{getenv "MYSQL_PASSWORD"}},
+  'database' => '{{getenv "MYSQL_DATABASE"}}',
+  'username' => '{{getenv "MYSQL_USER"}}',
+  'password' => '{{getenv "MYSQL_PASSWORD"}}',
   'prefix' => '',
-  'host' => {{getenv "MYSQL_SERVER"}},
+  'host' => '{{getenv "MYSQL_SERVER"}}',
   'host' => 'mysql',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
@@ -34,14 +34,14 @@ $settings['install_profile'] = 'standard';
 $config_directories['sync'] = 'sites/default/files/config_oeSVvfhhZ_GsV4VDStU44Y8KsfvHL-Lu-0Trnk5SSi5BCuvx32J5kOFMGOS2xSPZv7xo2qLpzg/sync';
 
 $settings['trusted_host_patterns'] = array(
-  {{getenv "DRUPAL_TRUSTED_HOSTS"}},
+  '{{getenv "DRUPAL_TRUSTED_HOSTS"}}',
   'codekoalas\.com',
   'sociy\.io',
   'stagingserver\.site',
   'dev',
 );
 
-$settings['base_url'] = {{getenv "DRUPAL_BASE_URL"}};
+$settings['base_url'] = '{{getenv "DRUPAL_BASE_URL"}}';
 
 /**
  * Include a custom settings file if it exists.
