@@ -37,7 +37,7 @@ COPY site.conf /etc/apache2/sites-available/000-default.conf
 COPY confd /etc/confd/
 
 # Copy in drupal-specific files
-COPY drupal-settings.sh crons.conf start.sh /root/
+COPY drupal-settings.sh crons.conf start.sh mysqlimport.sh /root/
 COPY drupal7-settings /root/drupal7-settings/
 COPY drupal8-settings /root/drupal8-settings/
 
