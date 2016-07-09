@@ -12,8 +12,7 @@ if [ 'mysql -h $MYSQL_SERVER -e ";"' ]; then
   echo "MySQL connection successful"
 
 
-  table_count=`mysql -B --disable-column-names --host $MYSQL_SERVER --execute="select count(*) from information_schema.tables where table_type = 'BASE TABLE' an
-d table_schema = '$MYSQL_DATABASE'" -s`
+  table_count=`mysql -B --disable-column-names --host $MYSQL_SERVER --execute="select count(*) from information_schema.tables where table_type = 'BASE TABLE' and table_schema = '$MYSQL_DATABASE'" -s`
   if [ "$?" = "0" ]; then
     echo "Successfully got table count of $table_count"
     if [ $table_count -lt 10 ]; then
