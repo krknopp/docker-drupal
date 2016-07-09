@@ -1,3 +1,0 @@
-[template]
-src = "drupal.template.tmpl"
-dest = "/root/drupal7-settings/conf.d/drupal.settings.toml"
