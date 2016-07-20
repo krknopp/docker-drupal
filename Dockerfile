@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 		apache2 \
         --no-install-recommends # && rm -r /var/lib/apt/lists/*
 
-RUN a2enmod ssl rewrite proxy_fcgi headers
+RUN a2enmod ssl rewrite proxy_fcgi headers remoteip
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor /var/run/php /mnt/sites-files /etc/confd/conf.d /etc/confd/templates
 
@@ -34,6 +34,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY www.conf /etc/php/7.0/fpm/pool.d/www.conf
 COPY php.ini /etc/php/7.0/fpm/php.ini
 COPY site.conf /etc/apache2/sites-available/000-default.conf
+COPY remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
 COPY confd /etc/confd/
 
 # Copy in drupal-specific files
