@@ -18,7 +18,7 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/lo
 && ln -s /usr/local/bin/composer /usr/bin/composer
 
 RUN git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && cd /usr/local/src/drush \
-&& git checkout 8.1.2 && cd /usr/local/src/drush && composer install
+&& git checkout 8.1.2 && cd /usr/local/src/drush && composer install && ln -s /usr/local/bin/drush /usr/local/src/drush/drush
 
 # Install Drupal Console
 ADD https://drupalconsole.com/installer /usr/local/bin/drupal
