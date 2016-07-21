@@ -36,6 +36,7 @@ COPY php.ini /etc/php/7.0/fpm/php.ini
 COPY site.conf /etc/apache2/sites-available/000-default.conf
 COPY remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
 COPY confd /etc/confd/
+COPY apache2.conf /etc/apache2/apache2.conf
 
 # Copy in drupal-specific files
 COPY drupal-settings.sh crons.conf start.sh mysqlimport.sh /root/
