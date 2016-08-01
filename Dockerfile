@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
 		libxml2-dev mime-support ssmtp \
 		php7.0-fpm php7.0-curl php7.0-gd php7.0-mysql php7.0-mcrypt php7.0-gmp php7.0-ldap  \
 		php-pear php-console-table php-apcu php-mongodb \
+		php-dev make \
 		apache2 \
         --no-install-recommends && apt-get -y upgrade && rm -r /var/lib/apt/lists/*
 

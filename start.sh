@@ -25,6 +25,7 @@ echo $(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal v
 
 if [[ -n "$LOCAL" &&  $LOCAL = "true" ]] ; then
   /usr/bin/pecl install xdebug
+  echo "zend_extension=/usr/lib/php/20151012/xdebug.so" >> /etc/php/7.0/fpm/php.ini
   /usr/bin/supervisorctl restart php-fpm
 fi
 
