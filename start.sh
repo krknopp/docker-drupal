@@ -24,8 +24,9 @@ echo $(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal v
 # Install appropriate apache config and restart apache
 
 if [[ -n "$LOCAL" &&  $LOCAL = "true" ]] ; then
-  /usr/bin/pecl install xdebug
-  echo "zend_extension=/usr/lib/php/20151012/xdebug.so" >> /etc/php/7.0/fpm/php.ini
+  /usr/bin/apt-get update && apt-get install -y \
+    php-xdebug \
+    --no-install-recommends && rm -r /var/lib/apt/lists/*
   /usr/bin/supervisorctl restart php-fpm
 fi
 
