@@ -18,7 +18,7 @@ fi
 crontab /root/crons.conf
 
 # Clone repo to container
-git clone -b $GIT_BRANCH $GIT_REPO /var/www/site/
+git clone --depth=1 -b $GIT_BRANCH $GIT_REPO /var/www/site/
 
 # Symlink files folder
 mkdir -p /mnt/sites-files/public
