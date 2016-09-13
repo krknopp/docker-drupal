@@ -11,7 +11,9 @@ chmod +x /root/project_env.sh
 grep -q -F "$GIT_HOSTS" /etc/hosts  || echo $GIT_HOSTS >> /etc/hosts
 
 # Add cron jobs
-sed -i "/drush/s/^\w*/$(shuf -i 1-60 -n 1)/" /root/crons.conf
+if [[ -n "$GIT_REPO" ]] ; then
+  sed -i "/drush/s/^\w*/$(echo $GIT_REPO | md5sum | grep -P '[0-5][0-9]' -o | head -1)/" /root/crons.conf
+fi
 if [[ ! -n "$PRODUCTION" || $PRODUCTION != "true" ]] ; then
   sed -i "/git pull/s/[0-9]\+/5/" /root/crons.conf
 fi
