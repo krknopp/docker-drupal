@@ -21,11 +21,13 @@ fi
 # Clone repo to container
 git clone --depth=1 -b $GIT_BRANCH $GIT_REPO /var/www/site/
 
-# Symlink files folder
+# Create and symlink files folders
 mkdir -p /mnt/sites-files/public
 mkdir -p /mnt/sites-files/private
+mkdir -p /var/www/site/sync
 cd $APACHE_DOCROOT/sites/default && ln -sf /mnt/sites-files/public files
 cd /var/www/site/ && ln -sf /mnt/sites-files/private private
+chown www-data:www-data -R /var/www/site/sync
 
 # Set DRUPAL_VERSION
 echo $(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal version" | awk '{ print substr ($(NF), 0, 2) }') > /root/drupal-version.txt

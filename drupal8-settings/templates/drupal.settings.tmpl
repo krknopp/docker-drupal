@@ -29,7 +29,7 @@ if ($settings['hash_salt']) {
 $settings['container_yamls'][] = __DIR__ . '/services.yml';
 
 $settings['install_profile'] = 'standard';
-$config_directories['sync'] = 'sites/default/files/config_oeSVvfhhZ_GsV4VDStU44Y8KsfvHL-Lu-0Trnk5SSi5BCuvx32J5kOFMGOS2xSPZv7xo2qLpzg/sync';
+$config_directories[CONFIG_SYNC_DIRECTORY] = '../sync';
 
 $settings['trusted_host_patterns'] = array(
   '{{getenv "DRUPAL_TRUSTED_HOSTS"}}',
