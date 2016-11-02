@@ -14,5 +14,5 @@ else
   exit
 fi
 
-mysqldump --host $MYSQL_SERVER --ignore-table=$MYSQL_DATABASE.watchdog $MYSQL_DATABASE > /root/$MYSQL_DATABASE.sql
-mysqldump --host $MYSQL_SERVER --no-data $MYSQL_DATABASE watchdog >> /root/$MYSQL_DATABASE.sql
+mysqldump --host $MYSQL_SERVER --ignore-table=$MYSQL_DATABASE.watchdog $MYSQL_DATABASE > /var/www/site/starter.sql
+mysqldump --host $MYSQL_SERVER --no-data $MYSQL_DATABASE watchdog >> /var/www/site/starter.sql

@@ -22,6 +22,8 @@ Consists of Ubuntu 16.04, PHP7 (FPM) and Apache 2.4.
 * SESAuthUser= AWS SES SMTP username
 * SESAuthPass= AWS SES SMTP password
 * SESmailhub= AWS SES SMTP address
+* CONF_REPO= Repo for config files (php.ini and 000-default.conf)
+* CONF_REPO_BRANCH= Branch for CONF_REPO
 
 # BASH aliases
 `mysqlc` connects to MySQL based on Environment Variables

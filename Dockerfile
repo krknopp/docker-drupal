@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y \
-                ca-certificates curl cron git supervisor mysql-client vim \
+                ca-certificates curl cron git supervisor mysql-client vim unzip \
 		libxml2-dev mime-support ssmtp \
 		php7.0-fpm php7.0-curl php7.0-gd php7.0-mysql php7.0-mcrypt php7.0-gmp php7.0-ldap  \
 		php-pear php-console-table php-apcu php-mongodb \
@@ -22,7 +22,7 @@ RUN git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && cd 
 
 # Install Drupal Console
 ADD https://drupalconsole.com/installer /usr/local/bin/drupal
-RUN chmod +x /usr/local/bin/drupal && /usr/local/bin/drupal init --override && /usr/local/bin/drupal settings:set checked "true"
+RUN chmod +x /usr/local/bin/drupal && /usr/local/bin/drupal init --override -n && /usr/local/bin/drupal settings:set checked "true"
 
 # Install Confd
 ADD https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 /usr/local/bin/confd
