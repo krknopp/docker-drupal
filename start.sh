@@ -26,6 +26,7 @@ mkdir -p /mnt/sites-files/public
 mkdir -p /mnt/sites-files/private
 mkdir -p $APACHE_DOCROOT/sites/default
 mkdir -p /var/www/site/sync
+mkdir -p $APACHE_DOCROOT/sites/default
 cd $APACHE_DOCROOT/sites/default && ln -sf /mnt/sites-files/public files
 cd /var/www/site/ && ln -sf /mnt/sites-files/private private
 chown www-data:www-data -R /var/www/site/sync

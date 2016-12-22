@@ -35,9 +35,10 @@ COPY site.conf /etc/apache2/sites-available/000-default.conf
 COPY remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
 COPY confd /etc/confd/
 COPY apache2.conf /etc/apache2/apache2.conf
+COPY registry_rebuild /root/.drush/registry_rebuild
 
 # Copy in drupal-specific files
-COPY wwwsite.conf drupal-settings.sh crons.conf start.sh mysqlimport.sh mysqlexport.sh /root/
+COPY wwwsite.conf drupal-settings.sh crons.conf start.sh mysqlimport.sh mysqlexport.sh load-configs.sh /root/
 COPY bash_aliases /root/.bash_aliases
 COPY drupal7-settings /root/drupal7-settings/
 COPY drupal8-settings /root/drupal8-settings/
