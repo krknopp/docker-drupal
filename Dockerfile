@@ -48,4 +48,6 @@ VOLUME /var/www/site /etc/apache2/sites-enabled /mnt/sites-files
 
 EXPOSE 80
 
+WORKDIR /var/www/site
+
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
