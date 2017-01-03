@@ -61,6 +61,7 @@ ln -s $APACHE_DOCROOT /root/apache_docroot
 # Hide Drupal errors in production sites
 if [[ -n "$PRODUCTION" && $PRODUCTION = "true" ]] ; then
   grep -q -F "\$conf['error_level'] = 0;" $APACHE_DOCROOT/sites/default/settings.php  || echo "\$conf['error_level'] = 0;" >> $APACHE_DOCROOT/sites/default/settings.php
+  grep -q -F "ini_set('error_reporting', E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);" $APACHE_DOCROOT/sites/default/settings.php  || echo "ini_set('error_reporting', E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);" >> $APACHE_DOCROOT/sites/default/settings.php
 else
   grep -q -F 'Header set X-Robots-Tag "noindex, nofollow"' /etc/apache2/sites-enabled/000-default.conf || sed -i 's/.*\/VirtualHost.*/\tHeader set X-Robots-Tag \"noindex, nofollow\"\n\n&/' /etc/apache2/sites-enabled/000-default.conf
 fi
