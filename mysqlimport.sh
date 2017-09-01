@@ -18,7 +18,7 @@ do
   
     if [ "$?" = "0" ]; then
       echo "i[$(date +"%Y-%m-%d %H:%M:%S:%3N %Z")] NOTICE: Successfully got table count of $table_count"
-      if [ $table_count -lt 10 ]; then
+      if [ $table_count -lt 2 ]; then
         echo "[$(date +"%Y-%m-%d %H:%M:%S:%3N %Z")] NOTICE: Table count too low, checking for starter.sql"
         if [ -e /var/www/site/starter.sql ]; then
           echo "[$(date +"%Y-%m-%d %H:%M:%S:%3N %Z")] NOTICE: starter.sql exists. Starting import."
