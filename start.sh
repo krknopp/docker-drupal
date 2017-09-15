@@ -45,6 +45,16 @@ if [[ -n "$LOCAL" &&  $LOCAL = "true" ]] ; then
   /usr/bin/supervisorctl restart php-fpm
 fi
 
+# Copy in post-merge script to run composer install
+cat /root/post-merge >> /var/www/site/.git/hooks/post-merge
+chmod +x /var/www/site/.git/hooks/post-merge
+
+# Run composer install
+composer install
+
+# Set DRUPAL_VERSION
+echo $(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal version" | awk '{ print substr ($(NF), 0, 2) }') > /root/drupal-version.txt
+
 # Install appropriate apache config and restart apache
 if [[ -n "$WWW" &&  $WWW = "true" ]] ; then
   cp /root/wwwsite.conf /etc/apache2/sites-enabled/000-default.conf
