@@ -21,6 +21,9 @@ fi
 # Clone repo to container
 git clone --depth=1 -b $GIT_BRANCH $GIT_REPO /var/www/site/
 
+# Run composer install
+composer install
+
 # Create and symlink files folders
 mkdir -p /mnt/sites-files/public
 mkdir -p /mnt/sites-files/private
