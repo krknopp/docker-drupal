@@ -18,14 +18,14 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/lo
 
 # Install Drush
 RUN git clone https://github.com/drush-ops/drush.git /usr/local/src/drush && cd /usr/local/src/drush \
-&& git checkout 8.1.9 && cd /usr/local/src/drush && composer install && ln -s /usr/local/src/drush/drush /usr/local/bin/drush
+&& git checkout 8.x && cd /usr/local/src/drush && composer install && ln -s /usr/local/src/drush/drush /usr/local/bin/drush
 
 # Install Drupal Console
 ADD https://drupalconsole.com/installer /usr/local/bin/drupal
 RUN chmod +x /usr/local/bin/drupal 
 
 # Install Confd
-ADD https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 /usr/local/bin/confd
+ADD https://github.com/kelseyhightower/confd/releases/download/v0.15.0/confd-0.15.0-linux-amd64 /usr/local/bin/confd
 RUN chmod +x /usr/local/bin/confd
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -40,8 +40,7 @@ COPY registry_rebuild /root/.drush/registry_rebuild
 # Copy in drupal-specific files
 COPY wwwsite.conf drupal-settings.sh crons.conf start.sh mysqlimport.sh mysqlexport.sh mysqldropall.sh load-configs.sh xdebug-php.ini post-merge /root/
 COPY bash_aliases /root/.bash_aliases
-COPY drupal7-settings /root/drupal7-settings/
-COPY drupal8-settings /root/drupal8-settings/
+COPY drupal-settings /root/drupal-settings/
 
 # Volumes
 VOLUME /var/www/site /etc/apache2/sites-enabled /mnt/sites-files
