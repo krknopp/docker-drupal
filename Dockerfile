@@ -28,6 +28,9 @@ RUN chmod +x /usr/local/bin/drupal
 ADD https://github.com/kelseyhightower/confd/releases/download/v0.15.0/confd-0.15.0-linux-amd64 /usr/local/bin/confd
 RUN chmod +x /usr/local/bin/confd
 
+# Add line to crontab to prevent mail from being sent
+RUN sed -i '/SHELL/iMAILTO=""' /etc/crontab
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY www.conf /etc/php/7.0/fpm/pool.d/www.conf
 COPY php.ini /etc/php/7.0/fpm/php.ini
