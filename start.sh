@@ -22,7 +22,7 @@ fi
 git clone --depth=1 -b $GIT_BRANCH $GIT_REPO /var/www/site/
 
 # Run composer install
-composer install
+composer install && composer update
 
 # Create and symlink files folders
 mkdir -p /mnt/sites-files/public
