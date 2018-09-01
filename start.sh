@@ -22,7 +22,7 @@ fi
 git clone --depth=1 -b $GIT_BRANCH $GIT_REPO /var/www/site/
 
 # Run composer install
-composer install
+composer install && composer upgrade
 
 # Create and symlink files folders
 mkdir -p /mnt/sites-files/public
@@ -50,13 +50,7 @@ fi
 cat /root/post-merge >> /var/www/site/.git/hooks/post-merge
 chmod +x /var/www/site/.git/hooks/post-merge
 
-# Run composer install
-composer install
-
-# Set DRUPAL_VERSION
-echo $(/usr/local/src/drush/drush --root=$APACHE_DOCROOT status | grep "Drupal version" | awk '{ print substr ($(NF), 0, 2) }') > /root/drupal-version.txt
-
-# Install appropriate apache config and restart apache
+# Install appropriate apache config
 if [[ -n "$WWW" &&  $WWW = "true" ]] ; then
   cp /root/wwwsite.conf /etc/apache2/sites-enabled/000-default.conf
 fi
