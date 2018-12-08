@@ -4,13 +4,13 @@ RUN echo "UTC" > /etc/localtime
 
 RUN apt-get update && apt-get install -y \
                 ca-certificates libcurl3 git mariadb-client vim unzip \
-		zlib1g-dev ssmtp \
+		zlib1g-dev libpng-dev libgmp-dev libldap2-dev rsync ssmtp \
         --no-install-recommends && apt-get -y upgrade && rm -r /var/lib/apt/lists/*
 
 RUN a2enmod rewrite headers
 
 # Configure PHP
-RUN docker-php-ext-install zip
+RUN docker-php-ext-install zip gd mysqli gmp ldap bcmath mbstring
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer \
