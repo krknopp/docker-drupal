@@ -1,0 +1,47 @@
+image: docker:latest
+
+variables:
+  DOCKER_DRIVER: overlay
+  IMAGE_TAG_RELEASE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  IMAGE_TAG_TEST: $CI_REGISTRY_IMAGE:test
+
+services:
+  - docker:dind
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker info
+
+build:
+  stage: build
+  script:
+    - docker build -t $IMAGE_TAG_TEST .
+    - docker push $IMAGE_TAG_TEST
+  tags:
+    - dind
+
+#lint:
+#  stage: test
+#  script:
+#    - docker pull $IMAGE_TAG_TEST 
+#    - docker run $IMAGE_TAG_TEST npm run lint
+#  tags:
+#    - dind
+
+#jest:
+#  stage: test
+#  script:
+#    - docker pull $IMAGE_TAG_TEST 
+#    - docker run $IMAGE_TAG_TEST npm test
+#  tags:
+#    - dind
+
+release-image:
+  stage: deploy
+  script:
+    - docker pull $IMAGE_TAG_TEST
+    - docker tag $IMAGE_TAG_TEST $IMAGE_TAG_RELEASE
+    - docker push $IMAGE_TAG_RELEASE
+  tags:
+    - dind
+
